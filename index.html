@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Rock Zone</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Raleway:wght@300;400;500;600&family=Special+Elite&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<!-- ════════════════════════════════════════════
+     TOAST уведомления
+════════════════════════════════════════════ -->
+<div id="toast-container"></div>
+
+<!-- ════════════════════════════════════════════
+     МОДАЛКА — добавить в плейлист
+════════════════════════════════════════════ -->
+<div id="playlist-modal" class="modal-overlay hidden">
+  <div class="modal-box">
+    <button class="modal-close" id="modal-close-btn">✕</button>
+    <h3 class="modal-title">Добавить в плейлист</h3>
+    <p class="modal-track-name" id="modal-track-name"></p>
+    <ul class="modal-playlist-list" id="modal-playlist-list"></ul>
+    <button class="modal-new-btn" id="modal-new-btn">+ Новый плейлист</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     МОДАЛКА — создать плейлист
+════════════════════════════════════════════ -->
+<div id="create-playlist-modal" class="modal-overlay hidden">
+  <div class="modal-box create-pl-box">
+    <button class="modal-close" id="create-pl-close-btn">✕</button>
+    <h3 class="modal-title">Новый плейлист</h3>
+    <div class="create-pl-cover-wrap">
+      <label class="create-pl-cover-label" for="create-pl-cover-input">
+        <div class="create-pl-cover-placeholder" id="create-pl-cover-placeholder">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          <span>Добавить обложку</span>
+        </div>
+        <img id="create-pl-cover-preview" class="create-pl-cover-preview hidden" src="" alt="" />
+      </label>
+      <input type="file" id="create-pl-cover-input" accept="image/*" class="hidden" />
+    </div>
+    <div class="create-pl-field">
+      <input type="text" id="create-pl-name-input" placeholder="Название плейлиста..." maxlength="60" autocomplete="off" />
+    </div>
+    <button class="create-pl-submit-btn" id="create-pl-submit-btn">Создать</button>
+  </div>
+</div>
+
+<!-- ════════════════════════════════════════════
+     SIDEBAR — навигация
+════════════════════════════════════════════ -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-logo">
+    <img src="/images/logo-sm.png" alt="Rock Zone" class="sidebar-logo-img" />
+  </div>
+
+  <nav class="sidebar-nav">
+    <button class="nav-item active" data-page="home">
+      <svg viewBox="0 0 24 24"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <span>Главная</span>
+    </button>
+    <button class="nav-item" data-page="catalog">
+      <svg viewBox="0 0 24 24"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+      <span>Каталог</span>
+    </button>
+    <button class="nav-item" data-page="playlist">
+      <svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"/><line x1="8" y1="12" x2="21" y2="12"/><line x1="8" y1="18" x2="21" y2="18"/><line x1="3" y1="6" x2="3.01" y2="6"/><line x1="3" y1="12" x2="3.01" y2="12"/><line x1="3" y1="18" x2="3.01" y2="18"/></svg>
+      <span>Плейлист</span>
+    </button>
+    <button class="nav-item" data-page="search">
+      <svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+      <span>Поиск</span>
+    </button>
+  </nav>
+
+  </div>
+</aside>
+
+<!-- ════════════════════════════════════════════
+     MAIN — страницы
+════════════════════════════════════════════ -->
+<main class="main-content">
+
+  <!-- ── СТРАНИЦА: ГЛАВНАЯ ── -->
+  <section class="page active" id="page-home">
+    <div class="home-bg">
+      <img src="/images/bg-lace.jpg" alt="" class="home-bg-img" />
+      <div class="home-bg-overlay"></div>
+    </div>
+
+    <div class="home-layout">
+
+      <!-- Левая колонка: виниловая пластинка + динамичная обложка -->
+      <div class="home-left">
+        <div class="vinyl-scene">
+
+          <!-- Динамическая обложка трека (зелёный прямоугольник из макета) -->
+          <div class="track-cover-dynamic" id="track-cover-dynamic">
+            <img id="track-cover-img" src="/images/cover1.jpg" alt="Track cover" />
+            <div class="cover-placeholder-text">Выберите трек</div>
+          </div>
+
+          <!-- Виниловая пластинка -->
+          <div class="vinyl-wrapper" id="vinyl-wrapper">
+            <div class="vinyl-disc" id="vinyl-disc">
+              <div class="vinyl-grooves">
+                <img src="/images/vinyl-texture.jpg" alt="vinyl" class="vinyl-texture-img" />
+              </div>
+              <div class="vinyl-label">
+                <img src="/images/logo-sm.png" alt="Rock Zone" class="vinyl-label-logo" />
+              </div>
+              <div class="vinyl-hole"></div>
+            </div>
+            <!-- Игла -->
+            <div class="vinyl-needle" id="vinyl-needle">
+              <div class="vinyl-needle-arm"></div>
+              <div class="vinyl-needle-head"></div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Сейчас играет -->
+        <div class="now-playing-info" id="now-playing-info">
+          <span class="np-genre" id="np-genre">Rock Zone</span>
+          <h2 class="np-title" id="np-title">Выберите трек</h2>
+          <p class="np-artist" id="np-artist">—</p>
+        </div>
+      </div>
+
+      <!-- Правая колонка: топ треков -->
+      <div class="home-right">
+        <h2 class="section-title">Популярные треки</h2>
+        <div class="track-list" id="home-track-list">
+          <!-- заполняется JS -->
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── СТРАНИЦА: КАТАЛОГ ── -->
+  <section class="page" id="page-catalog">
+    <div class="page-header">
+      <h1 class="page-title">Каталог</h1>
+      <div class="genre-filter" id="genre-filter">
+        <button class="genre-btn active" data-genre="">Все</button>
+      </div>
+    </div>
+    <div class="catalog-grid" id="catalog-grid">
+      <!-- заполняется JS -->
+    </div>
+  </section>
+
+  <!-- ── СТРАНИЦА: ПЛЕЙЛИСТ (сетка карточек) ── -->
+  <section class="page" id="page-playlist">
+    <div class="page-header">
+      <h1 class="page-title">Плейлисты</h1>
+      <button class="create-playlist-btn" id="create-playlist-btn">
+        <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        Создать плейлист
+      </button>
+    </div>
+    <div class="playlist-container" id="playlist-container">
+      <!-- заполняется JS -->
+    </div>
+  </section>
+
+  <!-- ── СТРАНИЦА: ДЕТАЛИ ПЛЕЙЛИСТА ── -->
+  <section class="page" id="page-playlist-detail">
+    <div class="page-header playlist-detail-header">
+      <button class="playlist-back-btn" id="playlist-back-btn">
+        <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="playlist-detail-cover-wrap" id="playlist-detail-cover-wrap">
+        <svg viewBox="0 0 24 24" class="playlist-detail-cover-icon"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        <img id="playlist-detail-cover-img" class="hidden" src="" alt="" />
+      </div>
+      <div class="playlist-detail-meta">
+        <h1 class="playlist-detail-title" id="playlist-detail-title">—</h1>
+        <p class="playlist-detail-count" id="playlist-detail-count"></p>
+        <button class="playlist-detail-play-btn" id="playlist-detail-play-btn">
+          <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+          Слушать
+        </button>
+      </div>
+    </div>
+    <div class="playlist-detail-tracks" id="playlist-detail-tracks">
+      <!-- заполняется JS -->
+    </div>
+  </section>
+
+  <!-- ── СТРАНИЦА: ПОИСК ── -->
+  <section class="page" id="page-search">
+    <div class="page-header">
+      <h1 class="page-title">Поиск</h1>
+      <div class="search-box">
+        <svg viewBox="0 0 24 24" class="search-icon"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+        <input type="text" id="search-input" placeholder="Исполнитель, трек, жанр..." />
+      </div>
+    </div>
+    <div class="search-results" id="search-results">
+      <p class="search-hint">Начните вводить запрос...</p>
+    </div>
+  </section>
+
+</main>
+
+<!-- ════════════════════════════════════════════
+     PLAYER — фиксированный снизу
+════════════════════════════════════════════ -->
+<footer class="player" id="player">
+
+  <!-- Обложка + инфо -->
+  <div class="player-left">
+    <div class="player-cover" id="player-cover">
+      <img id="player-cover-img" src="/images/cover1.jpg" alt="cover" />
+    </div>
+    <div class="player-info">
+      <span class="player-title" id="player-title">Выберите трек</span>
+      <span class="player-artist" id="player-artist">—</span>
+    </div>
+  </div>
+
+  <!-- Контролы -->
+  <div class="player-center">
+    <div class="player-controls">
+      <button class="ctrl-btn" id="btn-shuffle" title="Shuffle">
+        <svg viewBox="0 0 24 24"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/></svg>
+      </button>
+      <button class="ctrl-btn" id="btn-prev" title="Prev">
+        <svg viewBox="0 0 24 24"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5"/></svg>
+      </button>
+      <button class="ctrl-btn play-btn" id="btn-play" title="Play/Pause">
+        <svg viewBox="0 0 24 24" id="play-icon"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        <svg viewBox="0 0 24 24" id="pause-icon" class="hidden"><rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/></svg>
+      </button>
+      <button class="ctrl-btn" id="btn-next" title="Next">
+        <svg viewBox="0 0 24 24"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/></svg>
+      </button>
+      <button class="ctrl-btn" id="btn-repeat" title="Repeat">
+        <svg viewBox="0 0 24 24"><polyline points="17 1 21 5 17 9"/><path d="M3 11V9a4 4 0 0 1 4-4h14"/><polyline points="7 23 3 19 7 15"/><path d="M21 13v2a4 4 0 0 1-4 4H3"/></svg>
+      </button>
+    </div>
+
+    <!-- Прогресс бар -->
+    <div class="player-progress">
+      <span class="time-current" id="time-current">0:00</span>
+      <div class="progress-bar" id="progress-bar">
+        <div class="progress-fill" id="progress-fill"></div>
+        <div class="progress-thumb" id="progress-thumb"></div>
+      </div>
+      <span class="time-total" id="time-total">0:00</span>
+    </div>
+  </div>
+
+  <!-- Lyrics кнопка -->
+  <div class="player-lyrics-btn-wrap">
+    <button class="ctrl-btn" id="btn-lyrics" title="Текст песни">
+      <svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2z"/>
+        <path d="M8 10h8M8 14h5"/>
+      </svg>
+    </button>
+  </div>
+
+  <!-- Громкость -->
+  <div class="player-right">
+    <button class="ctrl-btn" id="btn-volume" title="Volume">
+      <svg viewBox="0 0 24 24" id="volume-icon"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg>
+    </button>
+    <div class="volume-bar" id="volume-bar">
+      <div class="volume-fill" id="volume-fill" style="width:80%"></div>
+    </div>
+  </div>
+
+  <audio id="audio-element" preload="metadata"></audio>
+</footer>
+
+
+<!-- ════════════════════════════════════════════
+     LYRICS PANEL
+════════════════════════════════════════════ -->
+<div class="lyrics-panel" id="lyrics-panel">
+  <div class="lyrics-panel-header">
+    <div class="lyrics-track-info">
+      <img id="lyrics-cover" src="" alt="" class="lyrics-cover-img" />
+      <div class="lyrics-track-text">
+        <div class="lyrics-track-title" id="lyrics-track-title">—</div>
+        <div class="lyrics-track-artist" id="lyrics-track-artist">—</div>
+      </div>
+    </div>
+    <button class="ctrl-btn lyrics-close-btn" id="lyrics-close-btn" title="Закрыть">✕</button>
+  </div>
+  <div class="lyrics-body" id="lyrics-body">
+    <div class="lyrics-placeholder">Выберите трек для отображения текста</div>
+  </div>
+</div>
+<div class="lyrics-backdrop" id="lyrics-backdrop"></div>
+
+<script src="app.js"></script>
+</body>
+</html>
