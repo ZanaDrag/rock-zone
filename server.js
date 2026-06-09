@@ -1283,7 +1283,7 @@ const TRACKS = [
     album: "Тень клоуна",
     duration: 161,
     cover: "/images/cover3.jpg",
-    audio: "/audio/track3",
+    audio: "/audio/track3.mp3",
     genre: "КиШ",
     lyrics: [
       { time: 0,   text: "♪" },
