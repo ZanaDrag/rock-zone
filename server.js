@@ -1283,7 +1283,7 @@ const TRACKS = [
     album: "Тень клоуна",
     duration: 161,
     cover: "/images/cover3.jpg",
-    audio: "https://res.cloudinary.com/dxz7xfevx/video/upload/track59_kihf1r.mp3",
+    audio: "/audio/track3",
     genre: "КиШ",
     lyrics: [
       { time: 0,   text: "♪" },
