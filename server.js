@@ -1318,7 +1318,7 @@ const TRACKS = [
     duration: 232,
     cover: "/images/cover3.jpg",
     audio: "/audio/track6.mp3",
-    genre: "Ария",
+    genre: "КиШ",
     lyrics: [
      
    ]
