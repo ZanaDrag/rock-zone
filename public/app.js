@@ -192,7 +192,7 @@ function renderCatalog(tracks = state.tracks) {
     card.dataset.id = track.id;
     card.innerHTML = `
       <div class="catalog-card-cover">
-        <img src="${track.cover}" alt="${track.title}" loading="lazy" />
+        <img src="${track.cover}" alt="${track.title}" />
         <div class="catalog-card-overlay">
           <div class="catalog-play-btn">
             <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
@@ -361,7 +361,7 @@ function createTrackItem(track, num, isActive, showAdd = true, playlistId = null
 
   item.innerHTML = `
     ${eqBars}
-    <div class="track-thumb"><img src="${track.cover}" alt="${track.title}" loading="lazy" /></div>
+    <div class="track-thumb"><img src="${track.cover}" alt="${track.title}"/></div>
     <div class="track-meta">
       <div class="track-name">${track.title}</div>
       <div class="track-artist">${track.artist}</div>
