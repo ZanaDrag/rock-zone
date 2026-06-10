@@ -1313,7 +1313,7 @@ const TRACKS = [
    {
     id: 56,
     title: "Тень 3. Двое против всех",
-    artist: "Ария",
+    artist: "Король и Шут",
     album: "Тень клоуна",
     duration: 232,
     cover: "/images/cover3.jpg",
