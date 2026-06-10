@@ -162,7 +162,7 @@ function getDemoTracks() {
       lyrics:[{ time: 0,   text: "♪" },{ time: 21,  text: "Потрясениям и праздникам - нет." },{ time: 26,  text: "Горизонтам и праздникам - нет." },{ time: 31,  text: "Вдохновениям и праздникам - нет, нет, нет, нет..." },{ time: 36,  text: "Безрыбье в золотой полынье." },{ time: 40,  text: "Вездесущность мышиной возни" },{ time: 45,  text: "Злые сумерки бессмертного дня" },{ time: 50,  text: "Долгая счастливая жизнь~" },{ time: 55,  text: "Такая долгая счастливая жизнь~" },{ time: 60,  text: "Отныне долгая счастливая жизнь" },{ time: 64, text:'Каждому из нас'},{time:67,text:'Каждому из нас'},{time:69,text:'Каждому из нас'},{time:71,text:'Каждому из нас'},{time:74,text:'Беспощадные глубины морщин'},{time:79,text:'Марианские впадины глаз'},{time:84,text:'Марианские хроники нас, нас, нас...'},{time:89,text:'Посреди одинаковых стен'},{time:94,text:'В гробовых отдалённых домах'},{time:99,text:'В непроглядной ледяной тишине...'},{time:104,text:'Долгая счастливая жизнь~'},{time:108,text:'Такая долгая счастливая жизнь~'},{time:113,text:'Отныне долгая счастливая жизнь'},{time:117,text:'Каждому из нас'},{time:120,text:'Каждому из нас'},{time:122,text:'Каждому из нас'},{time:125,text:'Каждому из нас'},{time:128,text:'балдеем, пат'},{time:167,text:'Искушениям и праздникам - нет.'},{time:171,text:'Преступлениям и праздникам - нет.'},{time:176,text:'Исключениям и праздникам - нет, нет, нет...'},{time:181,text:'На семи продувных сквозняках'},{time:186,text:'По болотам, по пустыням, степям'},{time:191,text:'По сугробам, по грязи, по земле'},{time:196,text:'Долгая счастливая жизнь~'},{time:200,text:'Такая долгая счастливая жизнь~'},{time:205,text:'Отныне долгая счастливая жизнь'},{time:209,text:'Каждому из нас'},
       { time: 212, text: "Каждому из нас" },
       { time: 214, text: "Каждому из нас" },
-      { time: 217, text: "Каждому из на-а-ас!" },
+      { time: 217, text: "Каждому из на-а-а-с!" },
       { time: 220,  text: "Долгая счастливая жизнь~" },
       { time: 224,  text: "Такая долгая счастливая жизнь~" },{ time: 229,  text: "Отныне долгая счастливая жизнь" },{ time: 234, text: "Каждому из нас" },{ time: 236, text: "Каждому из нас" }]},
   ];
@@ -503,13 +503,17 @@ function setPlaying(playing) {
 }
 
 function updatePlayerUI(track) {
-  dom.playerCoverImg.src = track.cover;
+  const newPlayerImg = new Image();
+        newPlayerImg.onload = () => { dom.playerCoverImg.src = track.cover; };
+        newPlayerImg.src = track.cover;
   dom.playerTitle.textContent = track.title;
   dom.playerArtist.textContent = track.artist;
   dom.npTitle.textContent = track.title;
   dom.npArtist.textContent = track.artist;
   dom.npGenre.textContent = track.genre || 'Rock Zone';
-  dom.trackCoverImg.src = track.cover;
+  const newCoverImg = new Image();
+        newCoverImg.onload = () => { dom.trackCoverImg.src = track.cover; };
+        newCoverImg.src = track.cover;
   dom.timeTotal.textContent = formatTime(track.duration);
 }
 
