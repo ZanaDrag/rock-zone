@@ -1244,7 +1244,34 @@ const TRACKS = [
     audio: "/audio/track6.mp3",
     genre: "Ария",
     lyrics: [
+     
+   ]
+  },
+   {
+    id: 57,
+    title: "Тень 4. В Париж - домой",
+    artist: "Король и Шут",
+    album: "Тень клоуна",
+    duration: 295,
+    cover: "/images/cover3.jpg",
+    audio: "/audio/track5.mp3",
+    genre: "КиШ",
+    lyrics: [
       { time: 0,   text: "♪" },
+      { time: 14,  text: "Rise the walls of iron and stone" }
+   ]
+  },
+   {
+    id: 58,
+    title: "Тень 10. A.M.T.V",
+    artist: "Король и Шут",
+    album: "Тень клоуна",
+    duration: 234,
+    cover: "/images/cover3.jpg",
+    audio: "/audio/track4.mp3",
+    genre: "КиШ",
+    lyrics: [
+       { time: 0,   text: "♪" },
       { time: 15,  text: "Открыл глаза," },
       { time: 17,   text: "Поставил чайник," },
       { time: 19,  text: "Кипит вода," },
@@ -1295,34 +1322,6 @@ const TRACKS = [
       { time: 210,  text: "MTV!" },
       { time: 218,  text: "MTV!" },
       { time: 220,   text: "♪" }
-   ]
-  },
-   {
-    id: 57,
-    title: "Тень 4. В Париж - домой",
-    artist: "Король и Шут",
-    album: "Тень клоуна",
-    duration: 295,
-    cover: "/images/cover3.jpg",
-    audio: "/audio/track5.mp3",
-    genre: "КиШ",
-    lyrics: [
-      { time: 0,   text: "♪" },
-      { time: 14,  text: "Rise the walls of iron and stone" }
-   ]
-  },
-   {
-    id: 58,
-    title: "Тень 10. A.M.T.V",
-    artist: "Король и Шут",
-    album: "Тень клоуна",
-    duration: 234,
-    cover: "/images/cover3.jpg",
-    audio: "/audio/track4.mp3",
-    genre: "КиШ",
-    lyrics: [
-      { time: 0,   text: "♪" },
-      { time: 14,  text: "Rise the walls of iron and stone" }
    ]
   },
    {
